@@ -1,0 +1,44 @@
+{
+  "albums": [
+    {
+      "id": 2,
+      "artist": "Benjamin Clementine",
+      "album": "Cornerstone",
+      "releaseDate": "2012",
+      "tags": "Electronic, Hip Hop",
+      "image": "3700551749669_600.jpg"
+    },
+    {
+      "releaseDate": "2001",
+      "artist": "Saint Germain",
+      "album": "Des-Prés Café",
+      "tags": "Electronic, Trip-Hop, House",
+      "id": 5,
+      "image": "R-13751-1346573044-4533.jpeg.jpg"
+    },
+    {
+      "artist": "Test",
+      "album": "Name",
+      "releaseDate": "2017",
+      "tags": "Electronic, dance",
+      "image": "R-11330832-1514378943-9702.jpeg.jpg",
+      "id": 6
+    },
+    {
+      "artist": "Daft Punk",
+      "album": "Discovery",
+      "releaseDate": "2001",
+      "tags": "House",
+      "image": "discovery.jpg",
+      "id": 8
+    },
+    {
+      "releaseDate": "2010",
+      "artist": "Fink",
+      "album": "Resurgam",
+      "tags": "Indie",
+      "id": 9,
+      "image": "R-10863391-1505568474-1440.jpeg.jpg"
+    }
+  ]
+}

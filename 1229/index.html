@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo time</title>
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div id="app">
+        <header>
+            <div class="container">
+                <h1 class="py-4">Mano albumai</h1>
+            </div>
+        </header>
+
+        <section class="container">
+            <div class="row my-4">
+                <div class="col">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <input class="form-control mr-sm-2 search-input" type="search" v-model="searchInput" placeholder="Paieška tarp albumų" aria-label="Search">
+                        </div>
+                        <select class="custom-select" v-model="yearSelected">
+                            <option selected value="all">Visi metai</option>
+                            <option v-bind:value="year" v-for="year in albumYears">{{year}}</option>
+                          </select>
+                    </form>
+                </div>
+                <div class="col text-right">
+                    <button class="btn btn-success" data-toggle="modal" data-target="#newAlbum" v-on:click="function(){modalMode.new = true;modalMode.edit = false;}">Pridėti naują</button>
+                </div>
+            </div>
+            <hr>
+
+            <div class="album-list row">
+                <div class="col my-3" v-for="album in filteredAlbums">
+                    <div class="album card card-default">
+                        <img class="card-img-top" :src="'upload/' + album.image" :alt="album.artist + ' ' + album.album">
+                        <div class="card-body row">
+                            <div class="col-xs-auto">
+                            </div>
+                            <div class="col d-flex flex-column">
+                                <h4>{{ album.artist }} - {{ album.album }} <small>/ {{ album.releaseDate }}</small></h4>
+                                <div class="tags">
+                                    <span v-for="tag in getTags(album.tags)" class="badge badge-pill badge-dark">{{ tag }}</span> <br>
+                                </div>
+                                <div class="text-right mt-auto">
+                                        <a href="#" class="card-link" @click="editAlbum(album)" data-toggle="modal" data-target="#newAlbum">Redaguoti</a>
+                                    <a href="#" class="card-link text-danger" @click="deleteAlbum(album)">Ištrinti</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal -->
+        <div class="modal fade" id="newAlbum" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" v-if="modalMode.new == true">Pridėti naują albumą</h5>
+                        <h5 class="modal-title" v-if="modalMode.edit == true">Redaguoti albumą</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <form name="music-records" class="form-horizontal">
+                            <div class="form-group row">
+                                <label for="artist" class="col-sm-3 col-form-label">Atlikėjas</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" v-model="newAlbum.artist" placeholder="Atlikėjas">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="album" class="col-sm-3 col-form-label">Pavadinimas</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" v-model="newAlbum.album">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="releaseDate" class="col-sm-3 col-form-label">Metai</label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" v-model="newAlbum.releaseDate">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                
+
+                                <label v-if="modalMode.new == true"  for="image" class="col-sm-3 col-form-label">Paveiksliukas</label>
+                                <div v-if="modalMode.edit == true" class="card-album-img"><img class="card-img-preview" :src="'upload/' + newAlbum.image"> </div>
+                                <label for="image" class="col-sm-3 col-form-label">Pakeisti paveiksliuką:</label>
+                               
+                                <div class="col-sm-9">
+                                    <input id="fileInput" type="file" class="form-control" @change="processFile($event)">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="releaseDate" class="col-sm-3 col-form-label">Stilus</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" v-model="newAlbum.tags">
+                                </div>
+                            </div>
+                        </form>
+                        <div class="success-message">
+                            Duomenys išsaugoti. <a href="#">Norite pridėti dar vieną?</a>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Uždaryti</button>
+                        <button v-if="modalMode.new == true" type="button" class="btn btn-primary" @click="saveAlbum()" data-dismiss="modal">Pridėti</button>
+                        <button v-if="modalMode.edit == true" type="button" class="btn btn-primary" @click="saveEditedAlbum()" data-dismiss="modal">Išsaugoti</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="node_modules/promise-polyfill/promise.js"></script>
+    <script src="node_modules/whatwg-fetch/fetch.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

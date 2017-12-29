@@ -1,0 +1,28 @@
+{
+  "albums": [
+    {
+      "id": 2,
+      "artist": "Benjamin Clementine",
+      "album": "At Least For Now",
+      "year": 2012,
+      "tags": "Electronic, Hip Hop",
+      "image": "benjamin.jpg"
+    },
+    {
+      "artist": "Daft Punk",
+      "album": "Discovery",
+      "year": "2001",
+      "tags": "House,Electronic",
+      "image": "discovery.jpg",
+      "id": 3
+    },
+    {
+      "year": "34",
+      "artist": "Naujas",
+      "name": "L",
+      "image": "",
+      "tags": "4",
+      "id": 4
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+.task-done {
+    text-decoration: line-through;
+    font-weight: 800;
+}

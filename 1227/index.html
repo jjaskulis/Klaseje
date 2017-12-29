@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo time</title>
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <h1 class="py-4">Mano albumai</h1>
+        </div>
+    </header>
+
+<div id="app">
+    <section class="container">
+        <div class="row my-4">
+            <div class="col">
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2 search-input" type="search" placeholder="Paieška tarp albumų" aria-label="Search" v-model="searchInput">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                       Metai
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="#" v-for="year in albumYears">{{year}}</a>
+
+                        </div>
+                      </div>
+                </form>
+                
+            </div>
+            <div class="col text-right">
+                <button class="btn btn-success btn-show-modal" data-toggle="modal" data-target="#newAlbum">Pridėti naują</button>
+            </div>
+        </div>
+        <hr>
+        <!-- Album list -->
+        <div class="album-list row" >
+            <div class="col my-3" v-for="album in filteredAlbums">
+                <div class="album card card-default">
+                    <img class="card-img-top" v-bind:src="'upload/'+album.image" v-bind:alt="album.artist + album.name">
+                    <div class="card-body row">
+                        <div class="col-xs-auto">
+                        </div>
+                        <div class="col">
+                            <h4>{{album.artist}} - {{album.album}} <small>/ {{album.releaseDate}}</small></h4>
+                            <div class="tags">
+                                <span v-for="tag in getTags(album.tags)" class="badge badge-pill badge-dark float-left">{{tag}}</span>
+                            </div>
+                            <a href="#" class="card-link float-right" v-on:click="deleteAlbum(album)">Ištrinti</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="newAlbum" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Pridėti naują albumą</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                        <form name="music-records" class="form-horizontal">
+                            <div class="form-group row">
+                                <label for="artist" class="col-sm-3 col-form-label">Atlikėjas</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" v-model="newAlbum.artist" placeholder="Atlikėjas">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="album" class="col-sm-3 col-form-label">Pavadinimas</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" v-model="newAlbum.name">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="releaseDate" class="col-sm-3 col-form-label">Metai</label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" v-model="newAlbum.year" >
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="image"  class="col-sm-3 col-form-label">Paveiksliukas</label>
+                                <div class="col-sm-9">
+                                    <input type="file" class="form-control" v-on:change="processFile($event)">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="tags" class="col-sm-3 col-form-label">Stilus</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" v-model="newAlbum.tags">
+                                </div>
+                            </div>
+                        </form>
+                        <div class="success-message">
+                            Duomenys išsaugoti. <a href="#">Norite pridėti dar vieną?</a>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Uždaryti</button>
+                        <button type="button" class="btn btn-primary" v-on:click="saveAlbum">Pridėti</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="node_modules/promise-polyfill/promise.js"></script>
+    <script src="node_modules/whatwg-fetch/fetch.js"></script>
+    <script src="script.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

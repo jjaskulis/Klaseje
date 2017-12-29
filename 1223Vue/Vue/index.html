@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue.js</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div id="app">
+            <h1 v-bind:title="title">{{title}}</h1>
+
+            <div v-for="task in tasks" >
+                <label class="form-check-label" >
+                    <input type="checkbox" v-model="task.isChecked"> 
+                    {{task.name}}
+                </label>
+            </div>
+
+
+            <div v-if="tasks.length === 0" class="alert alert-success" role="alert">
+                Užduočių nėra
+            </div>
+            <input type="text" v-model="taskInput" v-on:keyup.enter="addTask" placeholder="Pridėti naują">
+            <button v-on:click="addTask" v-bind:disabled="taskInput ===''">Pridėti</button>
+
+            <hr>
+            <div v-if="tasks.length !== 0">Atlikta užduočių:
+                <strong>{{doneTasks}}</strong> iš <strong>{{tasks.length}}</strong>
+            </div>
+        </div>
+    </div>
+    <script src="node_modules/vue/dist/vue.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

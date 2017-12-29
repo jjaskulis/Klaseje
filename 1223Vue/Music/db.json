@@ -1,0 +1,25 @@
+{
+  "albums": [
+    {
+      "artist": "Massive Attack",
+      "album": "Something",
+      "releaseDate": "2001",
+      "image": "massive-attack.jpg",
+      "id": 3
+    },
+    {
+      "artist": "Daft Punk",
+      "album": "Homework",
+      "releaseDate": "",
+      "image": "chomp-samba-main.jpg",
+      "id": 4
+    },
+    {
+      "artist": "Workers",
+      "album": "Music Music",
+      "releaseDate": "",
+      "image": "",
+      "id": 5
+    }
+  ]
+}

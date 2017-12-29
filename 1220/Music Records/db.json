@@ -1,0 +1,11 @@
+{
+  "albums": [
+    {
+      "artist": "Massive Attack",
+      "album": "Something",
+      "releaseDate": "2002",
+      "image": "massive-attack.jpg",
+      "id": 3
+    }
+  ]
+}

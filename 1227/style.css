@@ -1,0 +1,13 @@
+header {
+    color: #fff;
+    background: url("img/album-covers.jpg") 0 -20px repeat;
+}
+
+.badge {
+    margin-right: 5px;
+}
+
+.card {
+    min-width: 300px;
+    max-width: 600px;
+}

@@ -1,0 +1,35 @@
+header {
+    color: #fff;
+    background: url("img/album-covers.jpg") 0 -20px repeat;
+}
+
+.tags span {
+    margin: 0 2px;
+}
+.card-album-img{
+    padding:10px;
+    display: block;
+    width:100%;
+    background: #eee;
+}
+
+.card-img-preview {
+    max-width:200px;
+    margin:0 auto;
+    display:block;
+    box-shadow: 0px 0px 10px #888, 1px 1px 1px #333;
+}
+
+.file-input-heading {
+    dispay:block;
+    width:100%;
+}
+
+.album-list {
+    justify-content: left;
+}
+    .album-list .col {
+        min-width: 300px;
+        max-width: 350px;
+    }
+    .album-list .card { height: 100% }
