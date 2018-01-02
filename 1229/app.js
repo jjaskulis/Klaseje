@@ -3,7 +3,7 @@
 let app = new Vue({
     el: "#app",
     data: {
-        serverName :"http://localhost:1981",
+        serverName: "http://localhost:1981",
         albums: [],
         searchInput: "",
         yearSelected: "all",
@@ -44,32 +44,35 @@ let app = new Vue({
             this.newAlbum.id = album.id;
             this.newAlbum.image = album.image;
         },
-        saveEditedAlbum: function(){
-            fetch(app.serverName + "/albums/" + this.newAlbum.id , {
+        saveEditedAlbum: function () {
+            fetch(app.serverName + "/albums/" + this.newAlbum.id, {
                 method: "PUT",
                 headers: {
                     'content-type': 'application/json'
                 },
                 body: JSON.stringify(this.newAlbum)
-            }).then(function(response){
-                app.albums.forEach(function(album,index){
-                    if(album.id == app.newAlbum.id){
-                        Vue.set(app.albums,index,app.newAlbum);
+            }).then(function (response) {
+                app.albums.forEach(function (album, index) {
+                    if (album.id == app.newAlbum.id) {
+                        Vue.set(app.albums, index, app.newAlbum);
                     }
                     console.log("Album edited");
                 })
-            
+
             })
         },
         deleteAlbum: function (album) {
-            fetch(app.serverName + "/albums/" + album.id, {
-                method: "DELETE",
-            }).then(function (response) {
-                app.albums = app.albums.filter(function (item) {
-                    return item.id !== album.id;
+            let confirmation = window.confirm("Ar tikrai norite ištrinti albumą?");
+            if (confirmation) {
+                fetch(app.serverName + "/albums/" + album.id, {
+                    method: "DELETE",
+                }).then(function (response) {
+                    app.albums = app.albums.filter(function (item) {
+                        return item.id !== album.id;
+                    })
+                    console.log("Albumas ištrintas");
                 })
-                console.log("Albumas ištrintas");
-            })
+            }
         },
         processFile: function (event) {
             this.newAlbum.image = event.target.files[0] ? event.target.files[0].name : "";
@@ -96,7 +99,7 @@ let app = new Vue({
                 })
             })
         },
-        clearForm: function(){
+        clearForm: function () {
             let image = document.getElementById("fileInput");
             image.value = "";
             this.newAlbum = {
