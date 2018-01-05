@@ -1,0 +1,11 @@
+.jumbotron{
+    background:url("/img/bg-3.jpg") no-repeat center center;
+    background-size: cover;
+    border-radius:0;
+    height:400px;
+}
+@media (min-width:99px){
+    .jumbotron {
+        padding: 10px;
+    }
+}

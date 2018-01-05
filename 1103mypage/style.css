@@ -1,0 +1,97 @@
+html{
+    background-image:url("/img/fonas.png");
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    width:800px;
+    margin:auto;
+}
+
+h1{
+    font-size:36px;
+    color:#ed217c;
+}
+
+h2{
+    font-weight: 300;
+}
+
+p{
+    line-height: 1.3;
+}
+
+.menu ul{
+    list-style-type: none;
+    padding-left:0;
+    text-align:right;
+}
+
+.menu ul li{
+    display: inline-block;
+}
+
+.menu a {
+    display: block;
+    padding-top:45px;
+    text-decoration: none;
+    text-transform: uppercase;
+    background-position: center top;
+    background-repeat: no-repeat;
+}
+
+.menu .menu-recipes a{
+    background-image:url("/img/ikona_receptai.png");
+}
+.menu .menu-study a{
+    background-image:url("/img/ikona_studija_360.png");
+}
+
+.menu .menu-video a{
+    background-image:url("/img/download_360.png");
+}
+
+.menu .menu-icecream a{
+    background-image:url("/img/ikona_ledai.png");
+    background-size:20px;
+}
+
+.menu .menu-icecream a:hover{
+    background-image:url("/img/ikona_ledai2.png");
+    background-size:20px;
+}
+
+.menu li:not(.menu-icecream) a:hover{
+    background-position:center -84px;
+}
+
+.main-img{
+    width:100%;
+    background:#fff;
+    box-shadow: 1px 1px 2px #888;
+}
+
+article{
+    padding:10px;
+    margin-left:auto;
+    margin-right: auto;
+    background:#fff;
+}
+
+.ingredients{
+    float: left;
+    margin-right: 10px;
+    padding-top:10px;
+    background:url("/img/fonas_ingridientams_virsus.png") repeat-x;
+    
+}
+
+    .ingredients h2{
+        color:#ed217c;
+    }
+
+    .ingredients > div{
+        background:url("/img/fonas_ingridientams_linijos.png");
+        padding:0px 10px 10px 10px;
+    }
+
